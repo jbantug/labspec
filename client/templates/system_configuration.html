@@ -1,0 +1,141 @@
+<template name="system_configuration">
+	<div class="container">
+		<div class="starter-template">
+			<h4 class="text-left">System Configuration</h4>
+			<ul class="nav nav-tabs" id="sysconfig_tabs">
+				<li class="active"><a href="#access_levels" data-toggle="tab">Access Levels</a></li>
+				<li><a href="#notifications" data-toggle="tab">Notifications</a></li>
+				<li><a href="#backup" data-toggle="tab">Backup</a></li>
+				<li><a href="#restore" data-toggle="tab">Restore</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="access_levels">
+					<div class="col-md-3">
+						<div class="row">
+							<h4>Access Levels</h4>
+							<input type="text" class="form-control" placeholder="Enter Access Level or Description">
+							<div class="table-responsive">
+								<table class="table table-condensed table-hover">
+									<thead>
+										<tr>
+											<th class="text-center">Access Level</th>
+											<th class="text-center">Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">Level 1</div></td>
+											<td class="text-left"><div class="pseudo-center">Operate a process</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">Level 2</div></td>
+											<td class="text-left"><div class="pseudo-center">Print information</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">Level 3</div></td>
+											<td class="text-left"><div class="pseudo-center">Define a process</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">Level 4</div></td>
+											<td class="text-left"><div class="pseudo-center">Define a service</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">Level 5</div></td>
+											<td class="text-left"><div class="pseudo-center">Edit configuration</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">Level 6</div></td>
+											<td class="text-left"><div class="pseudo-center">Sync patient info on device</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">Level 7</div></td>
+											<td class="text-left"><div class="pseudo-center">Backup whole system information</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">Level 8</div></td>
+											<td class="text-left"><div class="pseudo-center">Restore whole system information</div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-md-offset-1">
+						<div class="row">
+							<h4>New Access Level</h4>
+							<table class="table tbl-borderless">
+								<tr>
+									<td>Access Level</td>
+									<td><input type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td>Description</td>
+									<td><input type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td><input type="button" class="btn btn-primary" value="Reset Fields"></td>
+									<td><input type="button" class="btn btn-primary" value="Add New Level"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="notifications">
+					<div class="col-md-3">
+						<div class="row">
+							<h4 class="text-left">Notifications</h4>
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th class="text-center">Notification</th>
+											<th class="text-center">On/Off</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">Unread Results</td>
+											<td class="text-center"><input type="checkbox"></td>
+										</tr>
+										<tr>
+											<td class="text-center">Unpaid Bills</td>
+											<td class="text-center"><input type="checkbox"></td>
+										</tr>
+										<tr>
+											<td class="text-center">Unstarted Services</td>
+											<td class="text-center"><input type="checkbox"></td>
+										</tr>
+										<tr>
+											<td class="text-center">Unfinished Services</td>
+											<td class="text-center"><input type="checkbox"></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td><input type="button" value="Save Changes" class="btn btn-primary"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="backup">
+					<div class="col-md-3">
+						<div class="row">
+							<h4 class="text-left">Backup</h4>
+							<input type="button" value="Backup Information" class="btn btn-primary">
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="restore">
+					<div class="col-md-3">
+						<div class="row">
+							<h4 class="text-left">Restore</h4>
+							<input type="button" value="Restore Information from Backup" class="btn btn-primary">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
