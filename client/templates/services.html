@@ -1,0 +1,231 @@
+<template name="services">
+	<div class="container">
+		<div class="starter-template">
+			<h4 class="text-left">Services</h4>
+			<ul class="nav nav-tabs" id="services_tabs">
+				<li class="active"><a href="#services" data-toggle="tab">Services</a></li>
+				<li><a href="#configure_services" data-toggle="tab">Configure Services</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="services">					
+					<div class="col-md-3">
+						<div class="row">
+							<h4>Service List</h4>
+							<input type="text" class="form-control" placeholder="Enter Service ID or Name">
+							<div class="table-responsive">
+								<table class="table table-condensed table-hover">
+									<thead>
+										<tr>
+											<th class="text-center">Service ID</th>
+											<th class="text-center">Service Name</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">SVC-001</div></td>
+											<td class="text-left"><div class="pseudo-center">Service 1</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">SVC-002</div></td>
+											<td class="text-left"><div class="pseudo-center">Service 2</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">SVC-003</div></td>
+											<td class="text-left"><div class="pseudo-center">Service 3</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">SVC-004</div></td>
+											<td class="text-left"><div class="pseudo-center">Service 4</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">SVC-005</div></td>
+											<td class="text-left"><div class="pseudo-center">Service 5</div></td>
+										</tr>
+										<tr>
+											<td class="text-left"><div class="pseudo-center">SVC-006</div></td>
+											<td class="text-left"><div class="pseudo-center">Service 6</div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-md-offset-1">
+						<div class="row">
+							<h4>Service Information</h4>
+							<table class="table tbl-borderless">
+								<tr>
+									<td>Service ID</td>
+									<td><input type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td>Service Name</td>
+									<td><input type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td>Cost</td>
+									<td><input type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td>Charge Type</td>
+									<td>
+										<select class="form-control">
+											<option>Employment Exam</option>
+											<option>Comprehensive Exam</option>
+											<option>Annual Physical Exam</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Charge Value</td>
+									<td><input type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td><input type="button" class="btn btn-primary" value="Remove Record"></td>							
+									<td><input type="button" class="btn btn-primary" value="Save Changes"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-3 col-md-offset-1">
+						<div class="row">
+							<h4>New Service</h4>
+							<table class="table tbl-borderless">
+								<tr>
+									<td>Service ID</td>
+									<td><input type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td>Service Name</td>
+									<td><input type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td>Cost</td>
+									<td><input type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td>Charge Type</td>
+									<td>
+										<select class="form-control">
+											<option>Employment Exam</option>
+											<option>Comprehensive Exam</option>
+											<option>Annual Physical Exam</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Charge Value</td>
+									<td><input type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td><input type="button" class="btn btn-primary" value="Reset Input Fields"></td>
+									<td><input type="button" class="btn btn-primary" value="Add New Record"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="configure_services">
+					<div class="col-md-12">
+						<div class="table-responsive">
+							<table class="table table-condensed">
+								<thead>
+									<tr>
+										<th class="text-center">Service ID</th>
+										<th class="text-center">Process 1</th>
+										<th class="text-center">Process 2</th>
+										<th class="text-center">Process 3</th>
+										<th class="text-center">Process 4</th>
+										<th class="text-center">Process 5</th>
+										<th class="text-center">Process 6</th>
+										<th class="text-center">Process 7</th>
+										<th class="text-center">Process 8</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>SVC-001</td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+									</tr>
+									<tr>
+										<td>SVC-002</td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+									</tr>
+									<tr>
+										<td>SVC-003</td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+									</tr>
+									<tr>
+										<td>SVC-004</td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+									</tr>
+									<tr>
+										<td>SVC-005</td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+									</tr>
+									<tr>
+										<td>SVC-006</td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+										<td><input type="checkbox"></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><input type="button" value="Save" class="btn btn-primary"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
