@@ -5,9 +5,9 @@
 			<div class="col-md-3">
 				<div class="row">
 					<h4>Patient List</h4>
-					<input type="text" class="form-control" placeholder="Enter SKU or Description">
+					<input type="text" class="form-control" placeholder="Enter Patient ID or Name">
 					<div class="table-responsive">
-						<table class="table table-condensed table-hover">
+						<table class="table table-condensed table-hover" id="patient_table">
 							<thead>
 								<tr>
 									<th class="text-center">Patient ID</th>
@@ -15,26 +15,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">PAT-001</div></td>
-									<td class="text-left"><div class="pseudo-center">Patient 1</div></td>
+								{{#each patients}}
+								<tr id="{{_id}}" class="tr_hover">
+									<td class="text-left"><div class="pseudo-center">{{patient_id}}</div></td>
+									<td class="text-left"><div class="pseudo-center">{{patient_name}}</div></td>
 								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">PAT-002</div></td>
-									<td class="text-left"><div class="pseudo-center">Patient 2</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">PAT-003</div></td>
-									<td class="text-left"><div class="pseudo-center">Patient 3</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">PAT-004</div></td>
-									<td class="text-left"><div class="pseudo-center">Patient 4</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">PAT-005</div></td>
-									<td class="text-left"><div class="pseudo-center">Patient 5</div></td>
-								</tr>
+								{{/each}}
 								<tr>
 									<td class="text-left"><div class="pseudo-center">PAT-006</div></td>
 									<td class="text-left"><div class="pseudo-center">Patient 6</div></td>
@@ -44,122 +30,129 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-4 mini-padding">
 				<div class="row">
+					{{#with current_patient}}
 					<h4>Patient Information</h4>
-					<table class="table tbl-borderless">
-						<tr>
-							<td>Patient ID</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Patient Name</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Birthdate</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Address</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Sex</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Civil Status</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Company</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>HMO</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>						
-						<tr>
-							<td>Email</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Phone</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Skype</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Allergies</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td><input type="button" class="btn btn-primary" value="Remove Record"></td>							
-							<td><input type="button" class="btn btn-primary" value="Save Changes"></td>
-						</tr>
-					</table>
+					<input type="hidden" id="pi_id" value="{{_id}}">
+					<form id="pi_form">
+						<table class="table tbl-borderless">
+							<tr>
+								<td>Patient ID</td>
+								<td><input type="text" name="patient_id" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Patient Name</td>
+								<td><input type="text" name="patient_name" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Birthdate</td>
+								<td><input type="text" name="birthdate" id="" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Address</td>
+								<td><input type="text" name="address" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Sex</td>
+								<td><input type="text" name="sex" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Civil Status</td>
+								<td><input type="text" name="civil_status" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Company</td>
+								<td><input type="text" name="" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>HMO</td>
+								<td><input type="text" name="" class="form-control"></td>
+							</tr>						
+							<tr>
+								<td>Email</td>
+								<td><input type="text" name="email" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Phone</td>
+								<td><input type="text" name="phone" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Skype</td>
+								<td><input type="text" name="skype" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Allergies</td>
+								<td><input type="text" name="allergies" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><input type="button" class="btn btn-primary" value="Remove Record"></td>							
+								<td><button type="submit" class="btn btn-primary">Save Changes</button></td>
+							</tr>
+						</table>
+					</form>
+					{{/with}}
 				</div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-4 mini-padding">
 				<div class="row">
 					<h4>New Patient</h4>
-					<table class="table tbl-borderless">
-						<tr>
-							<td>Patient ID</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Patient Name</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Birthdate</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Address</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Sex</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Civil Status</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Company</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>HMO</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>						
-						<tr>
-							<td>Email</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Phone</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Skype</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Allergies</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td><input type="button" class="btn btn-primary" value="Reset Input Fields"></td>
-							<td><input type="button" class="btn btn-primary" value="Add New Record"></td>
-						</tr>
-					</table>
+					<form id="np_form">
+						<table class="table tbl-borderless">
+							<tr>
+								<td>Patient ID</td>
+								<td><input type="text" name="patient_id" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Patient Name</td>
+								<td><input type="text" name="patient_name" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Birthdate</td>
+								<td><input type="text" name="birthdate" id="" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Address</td>
+								<td><input type="text" name="address" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Sex</td>
+								<td><input type="text" name="sex" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Civil Status</td>
+								<td><input type="text" name="civil_status" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Company</td>
+								<td><input type="text" name="" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>HMO</td>
+								<td><input type="text" name="" class="form-control"></td>
+							</tr>						
+							<tr>
+								<td>Email</td>
+								<td><input type="text" name="email" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Phone</td>
+								<td><input type="text" name="phone" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Skype</td>
+								<td><input type="text" name="skype" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Allergies</td>
+								<td><input type="text" name="allergies" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><input type="button" class="btn btn-primary" value="Reset Input Fields"></td>
+								<td><button type="submit" class="btn btn-primary">Add New Record</button></td>
+							</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>

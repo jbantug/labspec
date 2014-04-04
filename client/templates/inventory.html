@@ -1,13 +1,13 @@
 <template name="inventory">
 	<div class="container">
 		<div class="starter-template">
-			<h4 class="text-left">Inventory</h4>
+			<h4 class="text-left"><u>Inventory</u></h4>
 			<div class="col-md-3">
 				<div class="row">
 					<h4>Item List</h4>
-					<input type="text" class="form-control" placeholder="Enter SKU or Description">
+					<input type="text" class="form-control" placeholder="Enter SKU or Description" id="inventory_search">
 					<div class="table-responsive">
-						<table class="table table-condensed table-hover">
+						<table class="table table-condensed table-hover" id="inventory_table">
 							<thead>
 								<tr>
 									<th class="text-center">SKU</th>
@@ -15,95 +15,85 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">ITM-001</div></td>
-									<td class="text-left"><div class="pseudo-center">Item 1</div></td>
+								{{#each items}}
+								<tr id="{{_id}}" class="tr_hover">
+									<td class="text-left {{_id}}"><div class="pseudo-center {{_id}}">{{sku}}</div></td>
+									<td class="text-left {{_id}}"><div class="pseudo-center {{_id}}">{{item_description}}</div></td>
 								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">ITM-002</div></td>
-									<td class="text-left"><div class="pseudo-center">Item 2</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">ITM-003</div></td>
-									<td class="text-left"><div class="pseudo-center">Item 3</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">ITM-004</div></td>
-									<td class="text-left"><div class="pseudo-center">Item 4</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">ITM-005</div></td>
-									<td class="text-left"><div class="pseudo-center">Item 5</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">ITM-006</div></td>
-									<td class="text-left"><div class="pseudo-center">Item 6</div></td>
+								{{/each}}								
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-4 mini-padding">
 				<div class="row">
+					{{#with current_item}}
 					<h4>Item Information</h4>
-					<table class="table tbl-borderless">
-						<tr>
-							<td>SKU</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Item Description</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Purchase Cost</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Purchase Date</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Added Quantity</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td><input type="button" class="btn btn-primary" value="Remove Record"></td>							
-							<td><input type="button" class="btn btn-primary" value="Save Changes"></td>
-						</tr>
-					</table>
+					<input type="hidden" id="ii_id" value="{{_id}}">
+					<form id="ii_form">
+						<table class="table tbl-borderless">
+							<tr>
+								<td>SKU</td>
+								<td><input type="text" name="sku" class="form-control" id="ii_sku" value="{{sku}}" readonly></td>
+							</tr>
+							<tr>
+								<td>Item Description</td>
+								<td><input type="text" name="item_description" class="form-control" id="ii_item_description" value="{{item_description}}"></td>
+							</tr>
+							<tr>
+								<td>Purchase Cost</td>
+								<td><input type="text" name="purchase_cost" class="form-control" id="ii_purchase_cost" value="{{purchase_cost}}"></td>
+							</tr>
+							<tr>
+								<td>Purchase Date</td>
+								<td><input type="text" name="purchase_date" class="form-control" id="ii_purchase_date" value="{{purchase_date}}"></td>
+							</tr>
+							<tr>
+								<td>Added Quantity</td>
+								<td><input type="number" name="added_quantity" class="form-control" id="ii_added_quantity" value="{{added_quantity}}"></td>
+							</tr>
+							<tr>
+								<td><input type="button" class="btn btn-primary" value="Remove Record" id="remove_item"></td>
+								<td><button type="submit" class="btn btn-primary">Save Changes</button></td>
+							</tr>
+						</table>
+					</form>
+					{{/with}}
 				</div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-4 mini-padding">
 				<div class="row">
 					<h4>New Item</h4>
-					<table class="table tbl-borderless">
-						<tr>
-							<td>SKU</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Item Description</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Purchase Cost</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Purchase Date</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Added Quantity</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td><input type="button" class="btn btn-primary" value="Reset Input Fields"></td>
-							<td><input type="button" class="btn btn-primary" value="Add New Record"></td>
-						</tr>
-					</table>
+					<form id="ni_form">
+						<table class="table tbl-borderless">
+							<tr>
+								<td>SKU</td>
+								<td><input type="text" name="sku" class="form-control" id="ni_sku"></td>
+							</tr>
+							<tr>
+								<td>Item Description</td>
+								<td><input type="text" name="item_description" class="form-control" id="ni_item_description"></td>
+							</tr>
+							<tr>
+								<td>Purchase Cost</td>
+								<td><input type="text" name="purchase_cost" class="form-control" id="ni_purchase_cost"></td>
+							</tr>
+							<tr>
+								<td>Purchase Date</td>
+								<td><input type="text" name="purchase_date" class="form-control" id="ni_purchase_date"></td>
+							</tr>
+							<tr>
+								<td>Added Quantity</td>
+								<td><input type="number" name="added_quantity" class="form-control" id="ni_added_quantity"></td>
+							</tr>
+							<tr>
+								<td><input type="button" class="btn btn-primary" value="Reset Input Fields" id="reset_ni_form"></td>
+								<td><button type="submit" class="btn btn-primary">Add New Record</button></td>
+							</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>

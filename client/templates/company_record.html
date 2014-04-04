@@ -5,7 +5,7 @@
 			<div class="col-md-3">
 				<div class="row">
 					<h4>Company List</h4>
-					<input type="text" class="form-control" placeholder="Enter Company ID or Name">
+					<input type="text" class="form-control" placeholder="Enter Company ID or Name" id="company_search">
 					<div class="table-responsive">
 						<table class="table table-condensed table-hover">
 							<thead>
@@ -15,135 +15,124 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-001</div></td>
-									<td class="text-left"><div class="pseudo-center">Company 1</div></td>
+								{{#each companies}}
+								<tr id="{{_id}}" class="tr_hover">
+									<td class="text-left"><div class="pseudo-center">{{company_id}}</div></td>
+									<td class="text-left"><div class="pseudo-center">{{company_name}}</div></td>
 								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-002</div></td>
-									<td class="text-left"><div class="pseudo-center">Company 2</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-003</div></td>
-									<td class="text-left"><div class="pseudo-center">Company 3</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-004</div></td>
-									<td class="text-left"><div class="pseudo-center">Company 4</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-005</div></td>
-									<td class="text-left"><div class="pseudo-center">Company 5</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-006</div></td>
-									<td class="text-left"><div class="pseudo-center">Company 6</div></td>
-								</tr>
+								{{/each}}
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-4 mini-padding">
 				<div class="row">
+					{{#with current_company}}
 					<h4>Company Information</h4>
-					<table class="table tbl-borderless">
-						<tr>
-							<td>Company ID</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Company Name</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Address</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Date Joined</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>TIN</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Email</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Phone</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Skype</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Website</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Credit Limit</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td><input type="button" class="btn btn-primary" value="Remove Record"></td>							
-							<td><input type="button" class="btn btn-primary" value="Save Changes"></td>
-						</tr>
-					</table>
+					<input type="hidden" id="ci_id" value="{{_id}}">
+					<form id="ci_form">
+						<table class="table tbl-borderless">
+							<tr>
+								<td>Company ID</td>
+								<td><input type="text" name="company_id" class="form-control" value="{{company_id}}" readonly></td>
+							</tr>
+							<tr>
+								<td>Company Name</td>
+								<td><input type="text" name="company_name" class="form-control" value="{{company_name}}"></td>
+							</tr>
+							<tr>
+								<td>Address</td>
+								<td><input type="text" name="address" class="form-control" value="{{address}}"></td>
+							</tr>
+							<tr>
+								<td>Date Joined</td>
+								<td><input type="text" name="date_joined" class="form-control" id="ci_date_joined" value="{{date_joined}}"></td>
+							</tr>
+							<tr>
+								<td>TIN</td>
+								<td><input type="text" name="tin" class="form-control" value="{{tin}}"></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td><input type="email" name="email" class="form-control" value="{{email}}"></td>
+							</tr>
+							<tr>
+								<td>Phone</td>
+								<td><input type="text" name="phone" class="form-control" value="{{phone}}"></td>
+							</tr>
+							<tr>
+								<td>Skype</td>
+								<td><input type="text" name="skype" class="form-control" value="{{skype}}"></td>
+							</tr>
+							<tr>
+								<td>Website</td>
+								<td><input type="text" name="website" class="form-control" value="{{website}}"></td>
+							</tr>
+							<tr>
+								<td>Credit Limit</td>
+								<td><input type="text" name="credit_limit" class="form-control" value="{{credit_limit}}"></td>
+							</tr>
+							<tr>
+								<td><input type="button" class="btn btn-primary" value="Remove Record" id="remove_company"></td>
+								<td><button type="submit" class="btn btn-primary">Save Changes</button></td>
+							</tr>
+						</table>
+					</form>
+					{{/with}}
 				</div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-4 mini-padding">
 				<div class="row">
 					<h4>New Company</h4>
-					<table class="table tbl-borderless">
-						<tr>
-							<td>Company ID</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Company Name</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Address</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Date Joined</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>TIN</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Email</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Phone</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Skype</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Website</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Credit Limit</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td><input type="button" class="btn btn-primary" value="Reset Input Fields"></td>
-							<td><input type="button" class="btn btn-primary" value="Add New Record"></td>
-						</tr>
-					</table>
+					<form id="nc_form">
+						<table class="table tbl-borderless">
+							<tr>
+								<td>Company ID</td>
+								<td><input type="text" name="company_id" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Company Name</td>
+								<td><input type="text" name="company_name" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Address</td>
+								<td><input type="text" name="address" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Date Joined</td>
+								<td><input type="text" name="date_joined" class="form-control" id="nc_date_joined"></td>
+							</tr>
+							<tr>
+								<td>TIN</td>
+								<td><input type="text" name="tin" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td><input type="email" name="email" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Phone</td>
+								<td><input type="text" name="phone" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Skype</td>
+								<td><input type="text" name="skype" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Website</td>
+								<td><input type="text" name="website" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Credit Limit</td>
+								<td><input type="text" name="credit_limit" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><input type="button" class="btn btn-primary" value="Reset Input Fields" id="nc_reset"></td>
+								<td><button type="submit" class="btn btn-primary">Add New Record</button></td>
+							</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
