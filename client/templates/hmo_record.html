@@ -5,7 +5,7 @@
 			<div class="col-md-3">
 				<div class="row">
 					<h4>HMO List</h4>
-					<input type="text" class="form-control" placeholder="Enter HMO ID or Name">
+					<input type="text" class="form-control" placeholder="Enter HMO ID or Name" id="hmo_search">
 					<div class="table-responsive">
 						<table class="table table-condensed table-hover">
 							<thead>
@@ -15,135 +15,124 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-001</div></td>
-									<td class="text-left"><div class="pseudo-center">HMO 1</div></td>
+								{{#each hmos}}
+								<tr id="{{_id}}" class="tr_hover">
+									<td class="text-left"><div class="pseudo-center">{{hmo_id}}</div></td>
+									<td class="text-left"><div class="pseudo-center">{{hmo_name}}</div></td>
 								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-002</div></td>
-									<td class="text-left"><div class="pseudo-center">HMO 2</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-003</div></td>
-									<td class="text-left"><div class="pseudo-center">HMO 3</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-004</div></td>
-									<td class="text-left"><div class="pseudo-center">HMO 4</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-005</div></td>
-									<td class="text-left"><div class="pseudo-center">HMO 5</div></td>
-								</tr>
-								<tr>
-									<td class="text-left"><div class="pseudo-center">COM-006</div></td>
-									<td class="text-left"><div class="pseudo-center">HMO 6</div></td>
-								</tr>
+								{{/each}}
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-4 mini-padding">
 				<div class="row">
+					{{#with current_hmo}}
 					<h4>HMO Information</h4>
-					<table class="table tbl-borderless">
-						<tr>
-							<td>HMO ID</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>HMO Name</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Address</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Date Joined</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>TIN</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Email</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Phone</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Skype</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Website</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Credit Limit</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td><input type="button" class="btn btn-primary" value="Remove Record"></td>							
-							<td><input type="button" class="btn btn-primary" value="Save Changes"></td>
-						</tr>
-					</table>
+					<input type="hidden" id="hi_id" value="{{_id}}">
+					<form id="hi_form">
+						<table class="table tbl-borderless">
+							<tr>
+								<td>HMO ID</td>
+								<td><input type="text" name="hmo_id" value="{{hmo_id}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>HMO Name</td>
+								<td><input type="text" name="hmo_name" value="{{hmo_name}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Address</td>
+								<td><input type="text" name="address" value="{{address}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Date Joined</td>
+								<td><input type="text" name="date_joined" value="{{date_joined}}" class="form-control" id="hi_date_joined"></td>
+							</tr>
+							<tr>
+								<td>TIN</td>
+								<td><input type="text" name="tin" value="{{tin}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td><input type="text" name="email" value="{{email}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Phone</td>
+								<td><input type="text" name="phone" value="{{phone}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Skype</td>
+								<td><input type="text" name="skype" value="{{skype}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Website</td>
+								<td><input type="text" name="website" value="{{website}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Credit Limit</td>
+								<td><input type="text" name="credit_limit" value="{{credit_limit}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><input type="button" class="btn btn-primary" value="Remove Record" id="remove_hmo"></td>
+								<td><button type="submit" class="btn btn-primary">Save Changes</button></td>
+							</tr>
+						</table>
+					</form>
+					{{/with}}
 				</div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-4 mini-padding">
 				<div class="row">
 					<h4>New HMO</h4>
-					<table class="table tbl-borderless">
-						<tr>
-							<td>HMO ID</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>HMO Name</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Address</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Date Joined</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>TIN</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Email</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Phone</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Skype</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Website</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td>Credit Limit</td>
-							<td><input type="text" class="form-control"></td>
-						</tr>
-						<tr>
-							<td><input type="button" class="btn btn-primary" value="Reset Input Fields"></td>
-							<td><input type="button" class="btn btn-primary" value="Add New Record"></td>
-						</tr>
-					</table>
+					<form id="nh_form">
+						<table class="table tbl-borderless">
+							<tr>
+								<td>HMO ID</td>
+								<td><input type="text" name="hmo_id" value="{{hmo_id}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>HMO Name</td>
+								<td><input type="text" name="hmo_name" value="{{hmo_name}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Address</td>
+								<td><input type="text" name="address" value="{{address}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Date Joined</td>
+								<td><input type="text" name="date_joined" value="{{date_joined}}" class="form-control" id="nh_date_joined"></td>
+							</tr>
+							<tr>
+								<td>TIN</td>
+								<td><input type="text" name="tin" value="{{tin}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td><input type="text" name="email" value="{{email}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Phone</td>
+								<td><input type="text" name="phone" value="{{phone}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Skype</td>
+								<td><input type="text" name="skype" value="{{skype}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Website</td>
+								<td><input type="text" name="website" value="{{website}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Credit Limit</td>
+								<td><input type="text" name="credit_limit" value="{{credit_limit}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><input type="button" class="btn btn-primary" value="Reset Input Fields" id="nh_reset"></td>
+								<td><button type="submit" class="btn btn-primary">Add New Record</button></td>
+							</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>

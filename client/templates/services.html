@@ -11,7 +11,7 @@
 					<div class="col-md-3">
 						<div class="row">
 							<h4>Service List</h4>
-							<input type="text" class="form-control" placeholder="Enter Service ID or Name">
+							<input type="text" class="form-control" placeholder="Enter Service ID or Name" id="service_search">
 							<div class="table-responsive">
 								<table class="table table-condensed table-hover">
 									<thead>
@@ -21,107 +21,96 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td class="text-left"><div class="pseudo-center">SVC-001</div></td>
-											<td class="text-left"><div class="pseudo-center">Service 1</div></td>
+										{{#each services}}
+										<tr id="{{_id}}" class="tr_hover">
+											<td class="text-left"><div class="pseudo-center">{{service_id}}</div></td>
+											<td class="text-left"><div class="pseudo-center">{{service_name}}</div></td>
 										</tr>
-										<tr>
-											<td class="text-left"><div class="pseudo-center">SVC-002</div></td>
-											<td class="text-left"><div class="pseudo-center">Service 2</div></td>
-										</tr>
-										<tr>
-											<td class="text-left"><div class="pseudo-center">SVC-003</div></td>
-											<td class="text-left"><div class="pseudo-center">Service 3</div></td>
-										</tr>
-										<tr>
-											<td class="text-left"><div class="pseudo-center">SVC-004</div></td>
-											<td class="text-left"><div class="pseudo-center">Service 4</div></td>
-										</tr>
-										<tr>
-											<td class="text-left"><div class="pseudo-center">SVC-005</div></td>
-											<td class="text-left"><div class="pseudo-center">Service 5</div></td>
-										</tr>
-										<tr>
-											<td class="text-left"><div class="pseudo-center">SVC-006</div></td>
-											<td class="text-left"><div class="pseudo-center">Service 6</div></td>
-										</tr>
+										{{/each}}
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 col-md-offset-1">
+					<div class="col-md-4 mini-padding">
 						<div class="row">
+							{{#with current_service}}
 							<h4>Service Information</h4>
-							<table class="table tbl-borderless">
-								<tr>
-									<td>Service ID</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Service Name</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Cost</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Charge Type</td>
-									<td>
-										<select class="form-control">
-											<option>Employment Exam</option>
-											<option>Comprehensive Exam</option>
-											<option>Annual Physical Exam</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>Charge Value</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td><input type="button" class="btn btn-primary" value="Remove Record"></td>							
-									<td><input type="button" class="btn btn-primary" value="Save Changes"></td>
-								</tr>
-							</table>
+							<input type="hidden" id="si_id" value="{{_id}}">
+							<form id="si_form">
+								<table class="table tbl-borderless">
+									<tr>
+										<td>Service ID</td>
+										<td><input type="text" name="service_id" value="{{service_id}}" class="form-control" readonly></td>
+									</tr>
+									<tr>
+										<td>Service Name</td>
+										<td><input type="text" name="service_name" value="{{service_name}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Cost</td>
+										<td><input type="number" name="cost" value="{{cost}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Charge Type</td>
+										<td>
+											<select class="form-control" name="charge_type" >
+												<option>Employment Exam</option>
+												<option>Comprehensive Exam</option>
+												<option>Annual Physical Exam</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Charge Value</td>
+										<td><input type="number" name="charge_value" value="{{charge_value}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td><input type="button" class="btn btn-primary" value="Remove Service" id="remove_service"></td>
+										<td><button type="submit" class="btn btn-primary">Save Changes</button></td>
+									</tr>
+								</table>
+							</form>
+							{{/with}}
 						</div>
 					</div>
-					<div class="col-md-3 col-md-offset-1">
+					<div class="col-md-4 mini-padding">
 						<div class="row">
 							<h4>New Service</h4>
-							<table class="table tbl-borderless">
-								<tr>
-									<td>Service ID</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Service Name</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Cost</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Charge Type</td>
-									<td>
-										<select class="form-control">
-											<option>Employment Exam</option>
-											<option>Comprehensive Exam</option>
-											<option>Annual Physical Exam</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>Charge Value</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td><input type="button" class="btn btn-primary" value="Reset Input Fields"></td>
-									<td><input type="button" class="btn btn-primary" value="Add New Record"></td>
-								</tr>
-							</table>
+							<form id="ns_form">
+								<table class="table tbl-borderless">
+									<tr>
+										<td>Service ID</td>
+										<td><input type="text" name="service_id" value="{{service_id}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Service Name</td>
+										<td><input type="text" name="service_name" value="{{service_name}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Cost</td>
+										<td><input type="number" name="cost" value="{{cost}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Charge Type</td>
+										<td>
+											<select class="form-control" name="charge_type" >
+												<option>Employment Exam</option>
+												<option>Comprehensive Exam</option>
+												<option>Annual Physical Exam</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Charge Value</td>
+										<td><input type="number" name="charge_value" value="{{charge_value}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td><input type="button" class="btn btn-primary" value="Reset Input Fields" id="ns_reset"></td>
+										<td><button type="submit" class="btn btn-primary">Add New Service</button></td>
+									</tr>
+								</table>
+							</form>
 						</div>
 					</div>
 				</div>
