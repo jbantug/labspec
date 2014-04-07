@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="starter-template">
 			<h4 class="text-left">Professional Record</h4>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="row">
 					<h4>Professional List</h4>
 					<input type="text" class="form-control" placeholder="Enter Professional ID or Name">
@@ -10,108 +10,87 @@
 						<table class="table table-condensed table-hover">
 							<thead>
 								<tr>
-									<th class="text-center">Professional ID</th>
+									<th class="text-center">Prof. ID</th>
 									<th class="text-center">Service</th>
 									<th class="text-center">Professional</th>
 									<th class="text-center">Fee</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="text-center"><div class="">PRO-001</div></td>
-									<td class="text-center"><div class="">Service 1</div></td>
-									<td class="text-center"><div class="">Professional 1</div></td>
-									<td class="text-left"><div class="pseudo-center">500</div></td>
+								{{#each pro_service}}
+								<tr id="{{_id}}" class="tr_hover">
+									<td class="text-center"><div class="">{{ps_id}}</div></td>
+									<td class="text-center"><div class="">{{service}}</div></td>
+									<td class="text-center"><div class="">{{ps_name}}</div></td>
+									<td class="text-left"><div class="pseudo-center">{{ps_fee}}</div></td>
 								</tr>
-								<tr>
-									<td class="text-center"><div class="">PRO-002</div></td>
-									<td class="text-center"><div class="">Service 2</div></td>
-									<td class="text-center"><div class="">Professional 2</div></td>
-									<td class="text-left"><div class="pseudo-center">500</div></td>
-								</tr>
-								<tr>
-									<td class="text-center"><div class="">PRO-003</div></td>
-									<td class="text-center"><div class="">Service 3</div></td>
-									<td class="text-center"><div class="">Professional 3</div></td>
-									<td class="text-left"><div class="pseudo-center">500</div></td>
-								</tr>
-								<tr>
-									<td class="text-center"><div class="">PRO-004</div></td>
-									<td class="text-center"><div class="">Service 4</div></td>
-									<td class="text-center"><div class="">Professional 4</div></td>
-									<td class="text-left"><div class="pseudo-center">500</div></td>
-								</tr>
-								<tr>
-									<td class="text-center"><div class="">PRO-005</div></td>
-									<td class="text-center"><div class="">Service 5</div></td>
-									<td class="text-center"><div class="">Professional 5</div></td>
-									<td class="text-left"><div class="pseudo-center">500</div></td>
-								</tr>
-								<tr>
-									<td class="text-center"><div class="">PRO-006</div></td>
-									<td class="text-center"><div class="">Service 6</div></td>
-									<td class="text-center"><div class="">Professional 6</div></td>
-									<td class="text-left"><div class="pseudo-center">500</div></td>
-								</tr>
+								{{/each}}
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
-						<div class="row">
-							<h4>Professional Information</h4>
-							<table class="table tbl-borderless">
-								<tr>
-									<td>Professional ID</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Service</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Professional</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Professional Fee</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td><input type="button" class="btn btn-primary" value="Remove Record"></td>							
-									<td><input type="button" class="btn btn-primary" value="Save Changes"></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="col-md-3 col-md-offset-1">
-						<div class="row">
-							<h4>New Professional</h4>
-							<table class="table tbl-borderless">
-								<tr>
-									<td>Professional ID</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Service</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Professional</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td>Professional Fee</td>
-									<td><input type="text" class="form-control"></td>
-								</tr>
-								<tr>
-									<td><input type="button" class="btn btn-primary" value="Remove Record"></td>							
-									<td><input type="button" class="btn btn-primary" value="Save Changes"></td>
-								</tr>
-							</table>
-						</div>
-					</div>
+			<div class="col-md-4 mini-padding">
+				<div class="row">
+					{{#with current_pro}}
+					<h4>Professional Information</h4>
+					<input type="hidden" id="pi_id" value="{{_id}}">
+					<form id="pi_form">
+						<table class="table tbl-borderless">
+							<tr>
+								<td>Professional ID</td>
+								<td><input type="text" name="ps_id" value="{{ps_id}}" class="form-control" readonly></td>
+							</tr>
+							<tr>
+								<td>Service</td>
+								<td><input type="text" name="service" value="{{service}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Professional</td>
+								<td><input type="text" name="ps_name" value="{{ps_name}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Professional Fee</td>
+								<td><input type="text" name="ps_fee" value="{{ps_fee}}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><input type="button" class="btn btn-primary" value="Remove Record" id="remove_record"></td>
+								<td><button type="submit" class="btn btn-primary">Save Changes</button></td>
+							</tr>
+						</table>
+					</form>
+					{{/with}}
+				</div>
+			</div>
+			<div class="col-md-4 mini-padding">
+				<div class="row">
+					<h4>New Professional</h4>
+					<form id="np_form">
+						<table class="table tbl-borderless">
+							<tr>
+								<td>Professional ID</td>
+								<td><input type="text" name="ps_id" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Service</td>
+								<td><input type="text" name="service" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Professional</td>
+								<td><input type="text" name="ps_name" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>Professional Fee</td>
+								<td><input type="text" name="ps_fee" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><input type="button" class="btn btn-primary" value="Reset Input Fields" id="reset_np_form"></td>
+								<td><button type="submit" class="btn btn-primary">Add New Record</button></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>

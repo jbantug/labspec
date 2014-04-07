@@ -21,10 +21,6 @@
 									<td class="text-left"><div class="pseudo-center">{{patient_name}}</div></td>
 								</tr>
 								{{/each}}
-								<tr>
-									<td class="text-left"><div class="pseudo-center">PAT-006</div></td>
-									<td class="text-left"><div class="pseudo-center">Patient 6</div></td>
-								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -35,55 +31,81 @@
 					{{#with current_patient}}
 					<h4>Patient Information</h4>
 					<input type="hidden" id="pi_id" value="{{_id}}">
-					<form id="pi_form">
+					<form id="pai_form">
 						<table class="table tbl-borderless">
 							<tr>
 								<td>Patient ID</td>
-								<td><input type="text" name="patient_id" class="form-control"></td>
+								<td><input type="text" name="patient_id" value="{{patient_id}}" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>Patient Name</td>
-								<td><input type="text" name="patient_name" class="form-control"></td>
+								<td><input type="text" name="patient_name" value="{{patient_name}}" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>Birthdate</td>
-								<td><input type="text" name="birthdate" id="" class="form-control"></td>
+								<td><input type="text" name="birthdate" value="{{birthdate}}" id="birthday2" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>Address</td>
-								<td><input type="text" name="address" class="form-control"></td>
+								<td><input type="text" name="address" value="{{address}}" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>Sex</td>
-								<td><input type="text" name="sex" class="form-control"></td>
+								<td>
+									<select class="form-control" id="sex2">
+										<option value="Male">Male</option>
+										<option value="Female">Female</option>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td>Civil Status</td>
-								<td><input type="text" name="civil_status" class="form-control"></td>
+								<td>
+									<select class="form-control" id="civil_status2">
+										<option value="Single">Single</option>
+										<option value="Married">Married</option>
+										<option value="Divorced">Divorced</option>
+										<option value="Widowed">Widowed</option>
+										<option value="Separated">Separated</option>
+										<option value="Others">Others</option>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td>Company</td>
-								<td><input type="text" name="" class="form-control"></td>
+								<td>
+									<select class="form-control" id="company2">
+										{{#each companies}}
+										<option value="{{company_id}}">{{company_name}}</option>
+										{{/each}}
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td>HMO</td>
-								<td><input type="text" name="" class="form-control"></td>
+								<td>
+									<select class="form-control" id="hmo2">
+										{{#each hmos}}
+										<option value="{{hmo_id}}">{{hmo_name}}</option>
+										{{/each}}
+									</select>
+								</td>
 							</tr>						
 							<tr>
 								<td>Email</td>
-								<td><input type="text" name="email" class="form-control"></td>
+								<td><input type="text" name="email" value="{{email}}" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>Phone</td>
-								<td><input type="text" name="phone" class="form-control"></td>
+								<td><input type="text" name="phone" value="{{phone}}" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>Skype</td>
-								<td><input type="text" name="skype" class="form-control"></td>
+								<td><input type="text" name="skype" value="{{skype}}" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>Allergies</td>
-								<td><input type="text" name="allergies" class="form-control"></td>
+								<td><input type="text" name="allergies" value="{{allergies}}" class="form-control"></td>
 							</tr>
 							<tr>
 								<td><input type="button" class="btn btn-primary" value="Remove Record"></td>							
@@ -97,7 +119,7 @@
 			<div class="col-md-4 mini-padding">
 				<div class="row">
 					<h4>New Patient</h4>
-					<form id="np_form">
+					<form id="npa_form">
 						<table class="table tbl-borderless">
 							<tr>
 								<td>Patient ID</td>
@@ -109,7 +131,7 @@
 							</tr>
 							<tr>
 								<td>Birthdate</td>
-								<td><input type="text" name="birthdate" id="" class="form-control"></td>
+								<td><input type="text" name="birthdate" id="birthday" class="form-control"></td>
 							</tr>
 							<tr>
 								<td>Address</td>
@@ -117,19 +139,45 @@
 							</tr>
 							<tr>
 								<td>Sex</td>
-								<td><input type="text" name="sex" class="form-control"></td>
+								<td>
+									<select class="form-control" id="sex">
+										<option value="Male">Male</option>
+										<option value="Female">Female</option>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td>Civil Status</td>
-								<td><input type="text" name="civil_status" class="form-control"></td>
+								<td>
+									<select class="form-control" id="civil_status">
+										<option value="Single">Single</option>
+										<option value="Married">Married</option>
+										<option value="Divorced">Divorced</option>
+										<option value="Widowed">Widowed</option>
+										<option value="Separated">Separated</option>
+										<option value="Others">Others</option>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td>Company</td>
-								<td><input type="text" name="" class="form-control"></td>
+								<td>
+									<select class="form-control" id="company">
+										{{#each companies}}
+										<option value="{{company_id}}">{{company_name}}</option>
+										{{/each}}
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td>HMO</td>
-								<td><input type="text" name="" class="form-control"></td>
+								<td>
+									<select class="form-control" id="hmo">
+										{{#each hmos}}
+										<option value="{{hmo_id}}">{{hmo_name}}</option>
+										{{/each}}
+									</select>
+								</td>
 							</tr>						
 							<tr>
 								<td>Email</td>

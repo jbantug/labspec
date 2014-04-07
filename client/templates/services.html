@@ -121,84 +121,22 @@
 								<thead>
 									<tr>
 										<th class="text-center">Service ID</th>
-										<th class="text-center">Process 1</th>
-										<th class="text-center">Process 2</th>
-										<th class="text-center">Process 3</th>
-										<th class="text-center">Process 4</th>
-										<th class="text-center">Process 5</th>
-										<th class="text-center">Process 6</th>
-										<th class="text-center">Process 7</th>
-										<th class="text-center">Process 8</th>
+										{{#each processes}}
+										<th class="text-center">{{process_name}}</th>
+										{{/each}}
+										<th class="text-center">Process 1</th>										
 									</tr>
 								</thead>
 								<tbody>
+									{{#each all_services}}
 									<tr>
-										<td>SVC-001</td>
+										<td>{{service_id}}</td>
+										{{#each processes}}
 										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
+										{{/each}}
 									</tr>
-									<tr>
-										<td>SVC-002</td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-									</tr>
-									<tr>
-										<td>SVC-003</td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-									</tr>
-									<tr>
-										<td>SVC-004</td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-									</tr>
-									<tr>
-										<td>SVC-005</td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-									</tr>
-									<tr>
-										<td>SVC-006</td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-										<td><input type="checkbox"></td>
-									</tr>
-									<tr>
+									{{/each}}
+									<!-- <tr>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -208,7 +146,7 @@
 										<td></td>
 										<td></td>
 										<td><input type="button" value="Save" class="btn btn-primary"></td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>

@@ -74,6 +74,14 @@ Template.services.services = function(){
 	return services.find( Session.get('service_keyword'),{sort:{service_id:1}});
 }
 
+Template.services.all_services = function(){
+	return services.find();
+}
+
+Template.services.processes = function(){
+	return processes.find();
+}
+
 //Template helpers
 Template.services.helpers({
 	current_service: function(){
