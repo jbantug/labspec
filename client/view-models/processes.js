@@ -11,6 +11,7 @@ Template.processes.rendered = function () {
 Template.processes.created = function(){
 	$('#process_search').focus();
 	Session.set('process_keyword', {});
+	Session.set('process_keyword2', {});
 	Session.set('pi_id', '');
 }
 
@@ -26,7 +27,6 @@ Template.processes.events({
 			form[this.name] = this.value;
 		});
 		form['type'] = $('#type').val();
-		// form['items_used'] = $('#item_select').val();
 		form['professional_services'] = $('#ps_select').val();
 		form['timestamp'] = moment().format('YYYY/MM/DD');
 
@@ -63,9 +63,22 @@ Template.processes.events({
 		if(id){
 			Session.set('pi_id', id);
 			the_process = processes.findOne(Session.get('pi_id'));
+			the_items = process_items.find({process_id: Session.get('pi_id')}).fetch();
+			items_used = [];
+			$.each(the_items, function(index, val) {
+				items_used.push(val.sku);
+			});
 			$('#type2').select2('val', the_process.type);
-			$('#item_select2').select2('val', the_process.items_used);
+			$('#item_select2').select2('val', items_used);
 			$('#ps_select2').select2('val', the_process.professional_services);
+		}
+	},
+	'mouseover .tr_hover2, click .tr_hover2': function(e,t){
+		$(':focus').blur();
+		var id = $(e.target).parent().attr('id');
+		if(id){
+			Session.set('pi_id2', id);
+			the_process = processes.findOne(Session.get('pi_id2'));
 		}
 	},
 	'keyup #process_search, keydown #process_search': function(e,t){
@@ -76,11 +89,27 @@ Template.processes.events({
 			var ik = {$or: [{process_id:{$regex: q,$options: "i"}},{process_name:{$regex: q,$options: "i"}}]};
 			Session.set('process_keyword', ik);
 		}
+	},
+	'keyup #process_search2, keydown #process_search2': function(e,t){
+		q = e.target.value;
+		if (q == '') {
+			Session.set('process_keyword2', {});
+		}else{
+			var ik = {$or: [{process_id:{$regex: q,$options: "i"}},{process_name:{$regex: q,$options: "i"}}]};
+			Session.set('process_keyword2', ik);
+		}
+	},
+	'click #add_item': function(e,t){
+		process_items.insert({process_id: Session.get('pi_id2'), sku: $('#item_select3').val(), item_description: $('#item_select3 option:selected').text(), amount: $('#item_amount').val()});
 	}
 });
 
 Template.processes.processes = function(){
 	return processes.find( Session.get('process_keyword'),{sort:{process_id:1}});
+}
+
+Template.processes.processes2 = function(){
+	return processes.find( Session.get('process_keyword2'),{sort:{process_id:1}});
 }
 
 Template.processes.items = function(){
@@ -91,10 +120,18 @@ Template.processes.ps = function(){
 	return pro_services.find();
 }
 
+Template.processes.process_items = function(){
+	return process_items.find({process_id: Session.get('pi_id2')});
+}
+
 //Template helpers
 Template.processes.helpers({
 	current_process: function(){
 		the_process = processes.findOne(Session.get('pi_id'));
+		return the_process;
+	},
+	current_process2: function(){
+		the_process = processes.findOne(Session.get('pi_id2'));
 		return the_process;
 	}
 });

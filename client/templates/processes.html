@@ -8,6 +8,7 @@
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="processes">
+				{{#isolate}}
 					<div class="col-md-3">
 						<div class="row">
 							<h4>Process List</h4>
@@ -41,7 +42,7 @@
 								<table class="table tbl-borderless">
 									<tr>
 										<td>Process ID</td>
-										<td><input type="text" name="process_id" value="{{process_id}}" class="form-control"></td>
+										<td><input type="text" name="process_id" value="{{process_id}}" class="form-control" readonly></td>
 									</tr>
 									<tr>
 										<td>Process Name</td>
@@ -133,12 +134,14 @@
 							</form>
 						</div>
 					</div>
+				{{/isolate}}
 				</div>
 				<div class="tab-pane" id="configure_processes">
+				{{#isolate}}
 					<div class="col-md-3">
 						<div class="row">
 							<h4>Process List</h4>
-							<input type="text" class="form-control" placeholder="Enter Process ID or Name">
+							<input type="text" class="form-control" placeholder="Enter Process ID or Name" id="process_search2">
 							<div class="table-responsive">
 								<table class="table table-condensed table-hover">
 									<thead>
@@ -148,8 +151,8 @@
 										</tr>
 									</thead>
 									<tbody>
-										{{#each processes}}
-										<tr>
+										{{#each processes2}}
+										<tr id="{{_id}}" class="tr_hover2">
 											<td class="text-left"><div class="pseudo-center">{{process_id}}</div></td>
 											<td class="text-left"><div class="pseudo-center">{{process_name}}</div></td>
 										</tr>
@@ -161,6 +164,7 @@
 					</div>
 					<div class="col-md-5 col-md-offset-1">
 						<div class="row">
+							{{#with current_process2}}
 							<h4 class="text-left">Items used</h4>
 							<div class="table-responsive">
 								<table class="table table-condensed">
@@ -180,34 +184,25 @@
 													{{/each}}
 												</select>
 											</td>
-											<td><input type="text" class="form-control" size="40"></td>
-											<td><button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button></td>
+											<td>
+												<input type="text" class="form-control" size="40" id="item_amount">
+											</td>
+											<td><button class="btn btn-primary" id="add_item"><span class="glyphicon glyphicon-plus"></span></button></td>
 										</tr>
-										<tr>
-											<td>Item 1</td>
-											<td>5</td>
-											<td><button class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span></button></td>
+										{{#each process_items}}
+										<tr id="{{_id}}">
+											<td>[{{sku}}] {{item_description}}</td>
+											<td>{{amount}}</td>
+											<td><button class="btn btn-primary delete_item"><span class="glyphicon glyphicon-trash"></span></button></td>
 										</tr>
-										<tr>
-											<td>Item 2</td>
-											<td>1</td>
-											<td><button class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span></button></td>
-										</tr>
-										<tr>
-											<td>Item 3</td>
-											<td>1</td>
-											<td><button class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span></button></td>
-										</tr>
-										<tr>
-											<td>Item 4</td>
-											<td>4</td>
-											<td><button class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span></button></td>
-										</tr>
+										{{/each}}
 									</tbody>
 								</table>
 							</div>
+							{{/with}}
 						</div>
 					</div>
+				{{/isolate}}
 				</div>
 			</div>
 		</div>
