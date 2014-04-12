@@ -1,0 +1,127 @@
+<template name="cost_calculations">
+	<div class="container">
+		<div class="starter-template">
+			<h4 class="text-left">Cost Calculations</h4>
+			<div class="col-md-3">
+				<div class="row">
+					<h4>Service List</h4>
+					<input type="text" class="form-control" placeholder="Enter Service ID or Name">
+					<div class="table-responsive">
+						<table class="table table-condensed table-hover">
+							<thead>
+								<tr>
+									<th class="text-center">Service ID</th>
+									<th class="text-center">Service Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">SVC-001</div></td>
+									<td class="text-left"><div class="pseudo-center">Service 1</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">SVC-002</div></td>
+									<td class="text-left"><div class="pseudo-center">Service 2</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">SVC-003</div></td>
+									<td class="text-left"><div class="pseudo-center">Service 3</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">SVC-004</div></td>
+									<td class="text-left"><div class="pseudo-center">Service 4</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">SVC-005</div></td>
+									<td class="text-left"><div class="pseudo-center">Service 5</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">SVC-006</div></td>
+									<td class="text-left"><div class="pseudo-center">Service 6</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div class="row">
+					<h4>Process List for SVC-001</h4>
+					<input type="text" class="form-control" placeholder="Enter Process ID or Name">
+					<div class="table-responsive">
+						<table class="table table-condensed table-hover">
+							<thead>
+								<tr>
+									<th class="text-center">Process ID</th>
+									<th class="text-center">Process Name</th>
+									<th class="text-center">Cost</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">PRC-001</div></td>
+									<td class="text-left"><div class="pseudo-center">Process 1</div></td>
+									<td class="text-right"><div class="">300.00</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">PRC-002</div></td>
+									<td class="text-left"><div class="pseudo-center">Process 2</div></td>
+									<td class="text-right"><div class="">200.00</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">PRC-003</div></td>
+									<td class="text-left"><div class="pseudo-center">Process 3</div></td>
+									<td class="text-right"><div class="">360.00</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">PRC-004</div></td>
+									<td class="text-left"><div class="pseudo-center">Process 4</div></td>
+									<td class="text-right"><div class="">250.00</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">PRC-005</div></td>
+									<td class="text-left"><div class="pseudo-center">Process 5</div></td>
+									<td class="text-right"><div class="">210.00</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">PRC-006</div></td>
+									<td class="text-left"><div class="pseudo-center">Process 6</div></td>
+									<td class="text-right"><div class="">100.00</div></td>
+								</tr>
+								<tr>
+									<td class="text-left"><div class="pseudo-center">Total</div></td>
+									<td></td>
+									<td class="text-right"><div class="">1420.00</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div class="row">
+					<h4>Process Cost for PRC-001</h4>
+					<table class="table tbl-borderless">
+						<tr>
+							<td>Costing Type</td>
+							<td>
+								<select class="form-control">
+									<option>Override</option>
+									<option>Mark-up</option>		
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Cost</td>
+							<td><input type="text" class="form-control"></td>
+						</tr>
+						<tr>
+							<td></td>							
+							<td><input type="button" class="btn btn-primary" value="Save Changes"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,176 @@
+<template name="services">
+	<div class="container">
+		<div class="starter-template">
+			<h4 class="text-left">Services</h4>
+			<ul class="nav nav-tabs" id="services_tabs">
+				<li class="active"><a href="#services" data-toggle="tab">Services</a></li>
+				<li><a href="#configure_services" data-toggle="tab">Configure Services</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="services">					
+				{{#isolate}}
+					<div class="col-md-3">
+						<div class="row">
+							<h4>Service List</h4>
+							<input type="text" class="form-control" placeholder="Enter Service ID or Name" id="service_search">
+							<div class="table-responsive">
+								<table class="table table-condensed table-hover">
+									<thead>
+										<tr>
+											<th class="text-center">Service ID</th>
+											<th class="text-center">Service Name</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{#each services}}
+										<tr id="{{_id}}" class="tr_hover">
+											<td class="text-left"><div class="pseudo-center">{{service_id}}</div></td>
+											<td class="text-left"><div class="pseudo-center">{{service_name}}</div></td>
+										</tr>
+										{{/each}}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mini-padding">
+						<div class="row">
+							{{#with current_service}}
+							<h4>Service Information</h4>
+							<input type="hidden" id="si_id" value="{{_id}}">
+							<form id="si_form">
+								<table class="table tbl-borderless">
+									<tr>
+										<td>Service ID</td>
+										<td><input type="text" name="service_id" value="{{service_id}}" class="form-control" readonly></td>
+									</tr>
+									<tr>
+										<td>Service Name</td>
+										<td><input type="text" name="service_name" value="{{service_name}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Cost</td>
+										<td><input type="number" name="cost" value="{{cost}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Charge Type</td>
+										<td>
+											<select class="form-control" name="charge_type" >
+												<option>Employment Exam</option>
+												<option>Comprehensive Exam</option>
+												<option>Annual Physical Exam</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Charge Value</td>
+										<td><input type="number" name="charge_value" value="{{charge_value}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td><input type="button" class="btn btn-primary" value="Remove Service" id="remove_service"></td>
+										<td><button type="submit" class="btn btn-primary">Save Changes</button></td>
+									</tr>
+								</table>
+							</form>
+							{{/with}}
+						</div>
+					</div>
+					<div class="col-md-4 mini-padding">
+						<div class="row">
+							<h4>New Service</h4>
+							<form id="ns_form">
+								<table class="table tbl-borderless">
+									<tr>
+										<td>Service ID</td>
+										<td><input type="text" name="service_id" value="{{service_id}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Service Name</td>
+										<td><input type="text" name="service_name" value="{{service_name}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Cost</td>
+										<td><input type="number" name="cost" value="{{cost}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Charge Type</td>
+										<td>
+											<select class="form-control" name="charge_type" >
+												<option>Employment Exam</option>
+												<option>Comprehensive Exam</option>
+												<option>Annual Physical Exam</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Charge Value</td>
+										<td><input type="number" name="charge_value" value="{{charge_value}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td><input type="button" class="btn btn-primary" value="Reset Input Fields" id="ns_reset"></td>
+										<td><button type="submit" class="btn btn-primary">Add New Service</button></td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+				{{/isolate}}
+				</div>
+				<div class="tab-pane" id="configure_services">
+				{{#isolate}}
+					<div class="col-md-3">
+						<div class="row">
+							<h4>Service List</h4>
+							<input type="text" class="form-control" placeholder="Enter Service ID or Name" id="service_search2">
+							<div class="table-responsive">
+								<table class="table table-condensed table-hover">
+									<thead>
+										<tr>
+											<th class="text-center">Service ID</th>
+											<th class="text-center">Service Name</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{#each services2}}
+										<tr id="{{_id}}" class="tr_hover2">
+											<td class="text-left"><div class="pseudo-center">{{service_id}}</div></td>
+											<td class="text-left"><div class="pseudo-center">{{service_name}}</div></td>
+										</tr>
+										{{/each}}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mini-padding">
+						<div class="row">
+							{{#with current_service2}}
+							<h4>Processes for {{service_id}}</h4>
+							<input type="hidden" id="pu_id" value="{{service_id}}">
+							<form id="pu_form">
+								<table class="table tbl-borderless">
+									<tr>
+										<td>Processes used</td>
+										<td>
+											<select class="form-control" id="process_select" multiple>
+												{{#each processes}}
+												<option value="{{process_id}}">{{process_name}}</option>
+												{{/each}}
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td><input type="button" class="btn btn-primary" value="Remove Service" id=""></td>
+										<td><button type="submit" class="btn btn-primary">Save Changes</button></td>
+									</tr>
+								</table>
+							</form>
+							{{/with}}
+						</div>
+					</div>
+				{{/isolate}}				
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,11 @@
+.tbl-borderless tr, .tbl-borderless td {
+	border-top: none !important;
+}
+
+.pseudo-center {
+	padding-left: 20% !important;
+}
+
+.mini-padding {
+	margin-left: 20px;
+}

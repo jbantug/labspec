@@ -1,0 +1,210 @@
+<template name="processes">
+	<div class="container">
+		<div class="starter-template">
+			<h4 class="text-left">Processes</h4>
+			<ul class="nav nav-tabs" id="processes_tabs">
+				<li class="active"><a href="#processes" data-toggle="tab">Processes</a></li>
+				<li><a href="#configure_processes" data-toggle="tab">Configure Processes</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="processes">
+				{{#isolate}}
+					<div class="col-md-3">
+						<div class="row">
+							<h4>Process List</h4>
+							<input type="text" class="form-control" placeholder="Enter Process ID or Name" id="process_search">
+							<div class="table-responsive">
+								<table class="table table-condensed table-hover">
+									<thead>
+										<tr>
+											<th class="text-center">Process ID</th>
+											<th class="text-center">Process Name</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{#each processes}}
+										<tr id="{{_id}}" class="tr_hover">
+											<td class="text-left"><div class="pseudo-center">{{process_id}}</div></td>
+											<td class="text-left"><div class="pseudo-center">{{process_name}}</div></td>
+										</tr>
+										{{/each}}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mini-padding">
+						<div class="row">
+							{{#with current_process}}
+							<h4>Process Information</h4>
+							<input type="hidden" id="pi_id" value="{{_id}}">
+							<form id="pi_form">
+								<table class="table tbl-borderless">
+									<tr>
+										<td>Process ID</td>
+										<td><input type="text" name="process_id" value="{{process_id}}" class="form-control" readonly></td>
+									</tr>
+									<tr>
+										<td>Process Name</td>
+										<td><input type="text" name="process_name" value="{{process_name}}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Type</td>
+										<td>
+											<select class="form-control" id="type2">
+												<option value="Blood Extraction">Blood Extraction</option>
+												<option value="X-Ray">X-Ray</option>
+												<option value="Physical Check">Physical Check</option>
+												<option value="Eye Check">Eye Check</option>
+												<option value="Urine Check">Urine Check</option>
+												<option value="Stool Check">Stool Check</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Items Used</td>
+										<td>
+											<select class="form-control" id="item_select2" multiple disabled>
+												{{#each items}}
+												<option value="{{sku}}">{{item_description}}</option>
+												{{/each}}
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Professional Services accessed</td>
+										<td>
+											<select class="form-control" id="ps_select2" multiple>
+												{{#each ps}}
+												<option value="{{ps_id}}">{{service}}({{ps_name}})</option>
+												{{/each}}
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td><input type="button" class="btn btn-primary" value="Remove Record" id="remove_process"></td>
+										<td><button type="submit" class="btn btn-primary">Save Changes</button></td>
+									</tr>
+								</table>
+							</form>
+							{{/with}}
+						</div>
+					</div>
+					<div class="col-md-4 mini-padding">
+						<div class="row">
+							<h4>New Process</h4>
+							<form id="np_form">
+								<table class="table tbl-borderless">
+									<tr>
+										<td>Process ID</td>
+										<td><input type="text" name="process_id" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Process Name</td>
+										<td><input type="text" name="process_name" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>Type</td>
+										<td>
+											<select class="form-control" id="type">
+												<option value="Blood Extraction">Blood Extraction</option>
+												<option value="X-Ray">X-Ray</option>
+												<option value="Physical Check">Physical Check</option>
+												<option value="Eye Check">Eye Check</option>
+												<option value="Urine Check">Urine Check</option>
+												<option value="Stool Check">Stool Check</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>Professional Services accessed</td>
+										<td>
+											<select class="form-control" id="ps_select" multiple>
+												{{#each ps}}
+												<option value="{{ps_id}}">{{service}}({{ps_name}})</option>
+												{{/each}}
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td><input type="button" class="btn btn-primary" value="Reset Input Fields" id="np_reset"></td>
+										<td><button type="submit" class="btn btn-primary">Add New Record</button></td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+				{{/isolate}}
+				</div>
+				<div class="tab-pane" id="configure_processes">
+				{{#isolate}}
+					<div class="col-md-3">
+						<div class="row">
+							<h4>Process List</h4>
+							<input type="text" class="form-control" placeholder="Enter Process ID or Name" id="process_search2">
+							<div class="table-responsive">
+								<table class="table table-condensed table-hover">
+									<thead>
+										<tr>
+											<th class="text-center">Process ID</th>
+											<th class="text-center">Process Name</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{#each processes2}}
+										<tr id="{{_id}}" class="tr_hover2">
+											<td class="text-left"><div class="pseudo-center">{{process_id}}</div></td>
+											<td class="text-left"><div class="pseudo-center">{{process_name}}</div></td>
+										</tr>
+										{{/each}}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-offset-1">
+						<div class="row">
+							{{#with current_process2}}
+							<h4 class="text-left">Items used</h4>
+							<div class="table-responsive">
+								<table class="table table-condensed">
+									<thead>
+										<tr>
+											<th class="text-center">Item Description</th>
+											<th class="text-center col-sm-3">Amount</th>
+											<th class="text-center"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<select class="form-control" id="item_select3">
+													{{#each items}}
+													<option value="{{sku}}">{{item_description}}</option>
+													{{/each}}
+												</select>
+											</td>
+											<td>
+												<input type="text" class="form-control" size="40" id="item_amount">
+											</td>
+											<td><button class="btn btn-primary" id="add_item"><span class="glyphicon glyphicon-plus"></span></button></td>
+										</tr>
+										{{#each process_items}}
+										<tr id="{{_id}}">
+											<td>[{{sku}}] {{item_description}}</td>
+											<td>{{amount}}</td>
+											<td><button class="btn btn-primary delete_item"><span class="glyphicon glyphicon-trash"></span></button></td>
+										</tr>
+										{{/each}}
+									</tbody>
+								</table>
+							</div>
+							{{/with}}
+						</div>
+					</div>
+				{{/isolate}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
