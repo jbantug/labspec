@@ -7,11 +7,8 @@
 				<li><a href="#configure_services" data-toggle="tab">Configure Services</a></li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane active" id="services">					
-<<<<<<< HEAD
+				<div class="tab-pane active" id="services">
 				{{#isolate}}
-=======
->>>>>>> cc20340b580279c144180b746d13276193497c8d
 					<div class="col-md-3">
 						<div class="row">
 							<h4>Service List</h4>
@@ -117,7 +114,6 @@
 							</form>
 						</div>
 					</div>
-<<<<<<< HEAD
 				{{/isolate}}
 				</div>
 				<div class="tab-pane" id="configure_services">
@@ -172,47 +168,7 @@
 							{{/with}}
 						</div>
 					</div>
-				{{/isolate}}				
-=======
-				</div>
-				<div class="tab-pane" id="configure_services">
-					<div class="col-md-12">
-						<div class="table-responsive">
-							<table class="table table-condensed">
-								<thead>
-									<tr>
-										<th class="text-center">Service ID</th>
-										{{#each processes}}
-										<th class="text-center">{{process_name}}</th>
-										{{/each}}
-										<th class="text-center">Process 1</th>										
-									</tr>
-								</thead>
-								<tbody>
-									{{#each all_services}}
-									<tr>
-										<td>{{service_id}}</td>
-										{{#each processes}}
-										<td><input type="checkbox"></td>
-										{{/each}}
-									</tr>
-									{{/each}}
-									<!-- <tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td><input type="button" value="Save" class="btn btn-primary"></td>
-									</tr> -->
-								</tbody>
-							</table>
-						</div>
-					</div>
->>>>>>> cc20340b580279c144180b746d13276193497c8d
+				{{/isolate}}
 				</div>
 			</div>
 		</div>

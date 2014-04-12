@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "meteor": {
     "git": "https://github.com/meteor/meteor",
     "branch": "shark"
@@ -11,11 +10,6 @@
     "blaze-layout": {
       "git": "https://github.com/EventedMind/blaze-layout",
       "branch": "devel"
-=======
-  "packages": {
-    "iron-router": {
-      "path": "../../"
->>>>>>> cc20340b580279c144180b746d13276193497c8d
     }
   }
 }

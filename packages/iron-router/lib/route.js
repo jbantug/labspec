@@ -28,10 +28,7 @@ Route = function (router, name, options) {
   this.name = name;
   this.where = options.where || 'client';
   this.controller = options.controller;
-<<<<<<< HEAD
   this.action = options.action;
-=======
->>>>>>> cc20340b580279c144180b746d13276193497c8d
 
   if (typeof options.reactive !== 'undefined')
     this.isReactive = options.reactive;
@@ -45,26 +42,16 @@ Route.prototype = {
   constructor: Route,
 
   /**
-<<<<<<< HEAD
    * Compile the path.
-=======
-   * Compile the path. 
->>>>>>> cc20340b580279c144180b746d13276193497c8d
    *
    *  @return {Route}
    *  @api public
    */
 
   compile: function () {
-<<<<<<< HEAD
     var self = this;
     var path;
     var options = self.options;
-=======
-    var self = this
-      , path
-      , options = self.options;
->>>>>>> cc20340b580279c144180b746d13276193497c8d
 
     this.keys = [];
 
@@ -85,22 +72,14 @@ Route.prototype = {
               + (optional ? '' : slash)
               + '(?:'
               + (optional ? slash : '')
-<<<<<<< HEAD
               + (format || '')
-=======
-              + (format || '') 
->>>>>>> cc20340b580279c144180b746d13276193497c8d
               + (capture || (format && '([^/.]+?)' || '([^/]+?)')) + ')'
               + (optional || '');
           }
         )
         .replace(/([\/.])/g, '\\$1')
         .replace(/\*/g, '(.*)');
-<<<<<<< HEAD
 
-=======
-      
->>>>>>> cc20340b580279c144180b746d13276193497c8d
       self.re = new RegExp('^' + path + '$', options.sensitive ? '' : 'i');
     }
 
@@ -117,7 +96,6 @@ Route.prototype = {
    */
 
   params: function (path) {
-<<<<<<< HEAD
     if (!path)
       return null;
 
@@ -127,16 +105,6 @@ Route.prototype = {
     var keys = this.keys;
     var key;
     var value;
-=======
-    if (!path) return null;
-
-    var params = []
-      , m = this.exec(path)
-      , queryString
-      , keys = this.keys
-      , key
-      , value;
->>>>>>> cc20340b580279c144180b746d13276193497c8d
 
     if (!m)
       throw new Error('The route named "' + this.name + '" does not match the path "' + path + '"');
@@ -145,11 +113,7 @@ Route.prototype = {
       key = keys[i - 1];
       value = typeof m[i] == 'string' ? decodeURIComponent(m[i]) : m[i];
       if (key) {
-<<<<<<< HEAD
         params[key.name] = params[key.name] !== undefined ?
-=======
-        params[key.name] = params[key.name] !== undefined ? 
->>>>>>> cc20340b580279c144180b746d13276193497c8d
           params[key.name] : value;
       } else
         params.push(value);
@@ -194,11 +158,7 @@ Route.prototype = {
    * Returns true if the path matches and false otherwise.
    *
    * @param {String} path
-<<<<<<< HEAD
    * @return {Boolean}
-=======
-   * @return {Boolean} 
->>>>>>> cc20340b580279c144180b746d13276193497c8d
    * @api public
    */
   test: function (path) {
@@ -210,7 +170,6 @@ Route.prototype = {
   },
 
   resolve: function (params, options) {
-<<<<<<< HEAD
     var value;
     var isValueDefined;
     var result;
@@ -219,16 +178,6 @@ Route.prototype = {
     var hash;
     var query;
     var isMissingParams = false;
-=======
-    var value
-      , isValueDefined
-      , result
-      , wildCardCount = 0
-      , path = this.originalPath
-      , hash
-      , query
-      , isMissingParams = false;
->>>>>>> cc20340b580279c144180b746d13276193497c8d
 
     options = options || {};
     params = params || [];
@@ -250,13 +199,7 @@ Route.prototype = {
               value = '';
             } else if (!isValueDefined) {
               isMissingParams = true;
-<<<<<<< HEAD
               return;
-=======
-              console.warn('You called Route.prototype.resolve with a missing parameter. "' + key + '" not found in params');
-              return;
-              //throw new Error('You called Route.prototype.resolve with a missing parameter. "' + key + '" not found in params');
->>>>>>> cc20340b580279c144180b746d13276193497c8d
             }
 
             value = _.isFunction(value) ? value.call(params) : value;
@@ -271,11 +214,7 @@ Route.prototype = {
           function (match) {
             if (typeof params[wildCardCount] === 'undefined') {
               throw new Error(
-<<<<<<< HEAD
                 'You are trying to access a wild card parameter at index ' +
-=======
-                'You are trying to access a wild card parameter at index ' + 
->>>>>>> cc20340b580279c144180b746d13276193497c8d
                 wildCardCount +
                 ' but the value of params at that index is undefined');
             }
@@ -291,7 +230,6 @@ Route.prototype = {
         query = _.map(_.pairs(query), function (queryPart) {
           return queryPart[0] + '=' + encodeURIComponent(queryPart[1]);
         }).join('&');
-<<<<<<< HEAD
       }
 
       if (query && query.length)
@@ -300,16 +238,6 @@ Route.prototype = {
       if (hash) {
         hash = encodeURI(hash.replace('#', ''));
         path = query ?
-=======
-
-        if (query && query.length)
-          path = path + '/?' + query;
-      }
-
-      if (hash) {
-        hash = encodeURI(hash.replace('#', ''));
-        path = query ? 
->>>>>>> cc20340b580279c144180b746d13276193497c8d
           path + '#' + hash : path + '/#' + hash;
       }
     }
@@ -334,7 +262,6 @@ Route.prototype = {
 
   getController: function (path, options) {
     var self = this;
-<<<<<<< HEAD
     var handler;
     var controllerClass;
     var controller;
@@ -342,16 +269,6 @@ Route.prototype = {
     var routeName;
 
     var resolveValue = Utils.resolveValue;
-=======
-    var handler
-      , controllerClass
-      , controller
-      , action
-      , routeName;
-
-    var resolveValue = Utils.resolveValue;
-    var classify = Utils.classify; 
->>>>>>> cc20340b580279c144180b746d13276193497c8d
     var toArray = Utils.toArray;
 
     var findController = function (name) {
@@ -364,7 +281,6 @@ Route.prototype = {
       return controller;
     };
 
-<<<<<<< HEAD
     options = _.extend({}, options, {
       path: path,
       params: this.params(path),
@@ -372,29 +288,11 @@ Route.prototype = {
       action: this.action
     });
 
-=======
-    options = _.extend({}, this.router.options, this.options, options || {}, {
-      before: toArray(this.options.before),
-      after: toArray(this.options.after),
-      unload: toArray(this.options.unload),
-      waitOn: toArray(this.router.options.waitOn)
-        .concat(toArray(this.options.waitOn)),
-      path: path,
-      route: this,
-      router: this.router,
-      params: this.params(path)
-    });
-    
->>>>>>> cc20340b580279c144180b746d13276193497c8d
     // case 1: controller option is defined on the route
     if (this.controller) {
       controllerClass = _.isString(this.controller) ?
         findController(this.controller) : this.controller;
-<<<<<<< HEAD
       controller = new controllerClass(this.router, this, options);
-=======
-      controller = new controllerClass(options);
->>>>>>> cc20340b580279c144180b746d13276193497c8d
       return controller;
     }
 
@@ -402,27 +300,16 @@ Route.prototype = {
     routeName = this.name;
 
     if (routeName) {
-<<<<<<< HEAD
       routeName = Router.convertRouteControllerName(routeName + 'Controller');
       controllerClass = resolveValue(routeName);
 
       if (controllerClass) {
         controller = new controllerClass(this.router, this, options);
-=======
-      controllerClass = resolveValue(classify(routeName + 'Controller'));
-
-      if (controllerClass) {
-        controller = new controllerClass(options);
->>>>>>> cc20340b580279c144180b746d13276193497c8d
         return controller;
       }
     }
 
     // case 3: nothing found so create an anonymous controller
-<<<<<<< HEAD
     return new RouteController(this.router, this, options);
-=======
-    return new RouteController(options);
->>>>>>> cc20340b580279c144180b746d13276193497c8d
   }
 };
