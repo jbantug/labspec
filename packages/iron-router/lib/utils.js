@@ -5,6 +5,7 @@
 Utils = {};
 
 /**
+<<<<<<< HEAD
  * global object on node or window object in the browser.
  */
 
@@ -56,6 +57,18 @@ Utils.withDeprecatedNotice = function (info, fn, thisArg) {
     Utils.notifyDeprecated(info);
     return fn && fn.apply(thisArg || this, arguments);
   };
+=======
+ * Returns global on node or window in the browser.
+ */
+
+Utils.global = function () {
+  if (typeof window !== 'undefined')
+    return window;
+  else if (typeof global !== 'undefined')
+    return global;
+  else
+    return null;
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 };
 
 /**
@@ -71,9 +84,15 @@ Utils.withDeprecatedNotice = function (info, fn, thisArg) {
  */
 
 Utils.resolveValue = function (nameOrValue) {
+<<<<<<< HEAD
   var global = Utils.global;
   var parts;
   var ptr;
+=======
+  var global = Utils.global()
+    , parts
+    , ptr;
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 
   if (_.isString(nameOrValue)) {
     parts = nameOrValue.split('.')
@@ -106,7 +125,11 @@ Utils.hasOwnProperty = function (obj, key) {
 Utils.inherits = function (child, parent) {
   if (Utils.typeOf(child) !== '[object Function]')
     throw new Error('First parameter to Utils.inherits must be a function');
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
   if (Utils.typeOf(parent) !== '[object Function]')
     throw new Error('Second parameter to Utils.inherits must be a function');
 
@@ -213,23 +236,31 @@ Utils.capitalize = function (str) {
   return str.charAt(0).toUpperCase() + str.slice(1, str.length);
 };
 
+<<<<<<< HEAD
 Utils.upperCamelCase = function (str) {
   var re = /_|-|\./;
 
   if (!str)
     return '';
 
+=======
+Utils.classify = function (str) {
+  var re = /_|-|\./;
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
   return _.map(str.split(re), function (word) {
     return Utils.capitalize(word);
   }).join('');
 };
 
+<<<<<<< HEAD
 Utils.camelCase = function (str) {
   var output = Utils.upperCamelCase(str);
   output = output.charAt(0).toLowerCase() + output.slice(1, output.length);
   return output;
 };
 
+=======
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 Utils.pick = function (/* args */) {
   var args = _.toArray(arguments)
     , arg;
@@ -241,6 +272,7 @@ Utils.pick = function (/* args */) {
 
   return null;
 };
+<<<<<<< HEAD
 
 Utils.StringConverters = {
   'none': function(input) {
@@ -255,3 +287,5 @@ Utils.StringConverters = {
     return Utils.camelCase(input);
   }
 };
+=======
+>>>>>>> cc20340b580279c144180b746d13276193497c8d

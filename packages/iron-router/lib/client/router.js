@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 IronRouter = Utils.extend(IronRouter, {
   constructor: function (options) {
     var self = this;
@@ -7,6 +8,34 @@ IronRouter = Utils.extend(IronRouter, {
     
     this.isRendered = false;
 
+=======
+/**
+ * Client side router.
+ *
+ * @class ClientRouter
+ * @exports ClientRouter
+ * @extends IronRouter
+ */
+
+ClientRouter = Utils.extend(IronRouter, {
+  /**
+   * @constructor
+   * @param {Object} [options]
+   * @param {Boolean} [options.autoRender] Automatically render to the body
+   * @param {Boolean} [options.autoStart] Automatically start listening to
+   * events
+   */
+
+  constructor: function (options) {
+    var self = this;
+
+    ClientRouter.__super__.constructor.apply(this, arguments);
+
+    this.isRendered = false;
+
+    this._page = new PageManager;
+
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
     /**
      * The current RouteController instance. This is set anytime a new route is
      * dispatched. It's a reactive variable which you can get by calling
@@ -32,13 +61,18 @@ IronRouter = Utils.extend(IronRouter, {
     this._hasJustReloaded = false;
 
     Meteor.startup(function () {
+<<<<<<< HEAD
       Meteor.defer(function () {
+=======
+      setTimeout(function () {
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
         if (self.options.autoRender !== false)
           self.autoRender();
         if (self.options.autoStart !== false)
           self.start();
       });
     });
+<<<<<<< HEAD
 
     // proxy these methods to the underlying ui manager object
     _.each([
@@ -68,6 +102,8 @@ IronRouter = Utils.extend(IronRouter, {
     }
 
     return this;
+=======
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
   },
 
   /**
@@ -89,6 +125,7 @@ IronRouter = Utils.extend(IronRouter, {
     }
   },
 
+<<<<<<< HEAD
   clearUnusedRegions: function (usedYields) {
     if (!this._ui)
       throw new Error('No ui manager has been set');
@@ -110,6 +147,68 @@ IronRouter = Utils.extend(IronRouter, {
 
   run: function (controller, cb) {
     IronRouter.__super__.run.apply(this, arguments);
+=======
+  setLayout: function (layout) {
+    this._page.setLayout(layout);
+  },
+
+  setTemplate: function (template, to) {
+    this._page.setTemplate(template, to);
+  },
+
+  clearUnusedYields: function (usedYields) {
+    this._page.clearUnusedYields(usedYields);
+  },
+
+  setData: function (data) {
+    this._page.setData(data);
+  },
+
+  getData: function () {
+    return this._page.getData();
+  },
+
+  run: function (controller, cb) {
+    var self = this;
+    var where = Meteor.isClient ? 'client' : 'server';
+
+    Utils.assert(controller, 'run requires a controller');
+
+    // one last check to see if we should handle the route here
+    if (controller.where != where) {
+      self.onUnhandled(controller.path, controller.options);
+      return;
+    }
+
+    var runRouteController = function () {
+      Deps.autorun(function (c) {
+        self._routeComputation = c;
+        
+        if (! self._hasJustReloaded)
+          controller.runHooks('load');
+        self._hasJustReloaded = false;
+        
+        if (this.stopped)
+          return;
+        
+        Deps.autorun(function () {
+          controller.run();
+        });
+      });
+    };
+
+    if (this._currentController)
+      this._currentController.runHooks('unload');
+
+    this._currentController = controller;
+
+    if (this._routeComputation) {
+      this._routeComputation.stop();
+      this._routeComputation.onInvalidate(runRouteController);
+    } else {
+      runRouteController();
+    }
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 
     if (controller == this._currentController) {
       cb && cb(controller);
@@ -134,6 +233,7 @@ IronRouter = Utils.extend(IronRouter, {
    */
 
   go: function (routeNameOrPath, params, options) {
+<<<<<<< HEAD
     var self = this;
     var isPathRe = /^\/|http/
     var route;
@@ -152,10 +252,26 @@ IronRouter = Utils.extend(IronRouter, {
         skipReactive: true
       });
     };
+=======
+    var isPathRe = /^\/|http/
+      , route
+      , path
+      , onComplete
+      , controller
+      , done = function() {
+        options = options || {};
+        IronLocation.set(path, {
+          replaceState: options.replaceState,
+          state: options.state,
+          skipReactive: true
+        });
+      };
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 
     if (isPathRe.test(routeNameOrPath)) {
       path = routeNameOrPath;
       options = params;
+<<<<<<< HEAD
       
       // if the path hasn't changed (at all), we are going to do nothing here
       if (path === self._location.path()) {
@@ -164,11 +280,14 @@ IronRouter = Utils.extend(IronRouter, {
         return;
       }
       
+=======
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
       // issue here is in the dispatch process we might want to
       // make a server request so therefore not call this method yet, so
       // we need to push the state only after we've decided it's a client
       // request, otherwise let the browser handle it and send off to the
       // server
+<<<<<<< HEAD
       self.dispatch(path, options, done);
     } else {
       route = self.routes[routeNameOrPath];
@@ -203,6 +322,48 @@ IronRouter = Utils.extend(IronRouter, {
   unbindEvents: function () {
     $(document).off('click.ironRouter', this.options.linkSelector);
   },
+=======
+      this.dispatch(path, options, done);
+    } else {
+      route = this.routes[routeNameOrPath];
+      Utils.assert(route, 'No route found named ' + routeNameOrPath);
+      path = route.path(params, options);
+      controller = route.getController(path, options);
+      this.run(controller, done);
+    }
+  },
+
+  /**
+   * Returns an html string or a document fragment with the router's layout.
+   * This method also sets up the 'yield' helper on the layout. This is so that
+   * the yield helper has a reference to the router through the closure.
+   *
+   * @returns {String|DocumentFragment}
+   * @api public
+   */
+
+  render: function () {
+    this.isRendered = true;
+    return this._page.renderLayout();
+  },
+
+  /**
+   * Render the router into the body of the page automatically. Calles the
+   * render method inside Spark.render to create a renderer and appends to the
+   * document body.
+   *
+   * @api public
+   */
+
+  autoRender: function () {
+    var self = this;
+    var frag = Spark.render(function () {
+      return self.render();
+    });
+    document.body.appendChild(frag);
+  },
+
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 
   /**
    * Start listening to click events and set up a Deps.autorun for location
@@ -218,6 +379,7 @@ IronRouter = Utils.extend(IronRouter, {
 
     self.isStarted = true;
     
+<<<<<<< HEAD
     self._location = self.options.location || IronLocation;
     self._location.start();
     
@@ -227,6 +389,12 @@ IronRouter = Utils.extend(IronRouter, {
       var location;
       self._locationComputation = c;
       self.dispatch(self._location.path(), {state: history.state});
+=======
+    Deps.autorun(function (c) {
+      var location;
+      self._locationComputation = c;
+      self.dispatch(IronLocation.path(), {state: history.state});
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
     });
   },
 
@@ -239,9 +407,12 @@ IronRouter = Utils.extend(IronRouter, {
   stop: function () {
     this.isStarted = false;
 
+<<<<<<< HEAD
     this.unbindEvents();
     this._location.stop();
 
+=======
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
     if (this._locationComputation)
       this._locationComputation.stop();
   },
@@ -257,7 +428,11 @@ IronRouter = Utils.extend(IronRouter, {
   },
   
   /**
+<<<<<<< HEAD
    * if we don't handle a link, _and_ the  server doesn't handle it,
+=======
+   * if we don't handle a link, _and_ the server doesn't handle it,
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
    * do one of two things:
    *   a) if this is the initial route, then it can't be a static asset, so 
    *      show notFound or throw an error
@@ -266,6 +441,7 @@ IronRouter = Utils.extend(IronRouter, {
    * @api public
    */
   onRouteNotFound: function (path, options) {
+<<<<<<< HEAD
     if (this._location.path() !== path) {
       this.stop();
       window.location = path;
@@ -310,6 +486,17 @@ IronRouter = Utils.extend(IronRouter, {
     // and links which only change the hash.
     e.preventDefault();
     this.go(path);
+=======
+    if (history && history.state && ! history.state.initial) {
+      this.stop();
+      window.location = path;
+    } else if (this.options.notFoundTemplate) {
+      this.setLayout(this.options.layoutTemplate);
+      this.setTemplate(this.options.notFoundTemplate);
+    } else {
+      throw new Error('Oh no! No route found for path: "' + path + '"');
+    }
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
   }
 });
 
@@ -320,7 +507,11 @@ IronRouter = Utils.extend(IronRouter, {
  * @exports Router
  */
 
+<<<<<<< HEAD
 Router = new IronRouter;
+=======
+Router = new ClientRouter;
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 
 if (Meteor._reload) {
   // just register the fact that a migration _has_ happened
@@ -329,4 +520,8 @@ if (Meteor._reload) {
   // then when we come back up, check if it it's set
   var data = Meteor._reload.migrationData('iron-router');
   Router._hasJustReloaded = data;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cc20340b580279c144180b746d13276193497c8d

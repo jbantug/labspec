@@ -3,6 +3,7 @@
 </head>
 
 <template name="one">
+<<<<<<< HEAD
   <a href="/two">Two</a>
   <a href="/three">Three</a>
   <a href="/asset.txt">Asset</a>
@@ -10,4 +11,11 @@
 
 <template name="two">
   <a href="/">One</a>
+=======
+  {{#link route='two'}}Two{{/link}}
+</template>
+
+<template name="two">
+  {{#link route='one'}}One{{/link}}
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 </template>

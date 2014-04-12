@@ -6,12 +6,67 @@ var currentState = {
   path: location.pathname + location.search + location.hash
 };
 
+<<<<<<< HEAD
 function onpopstate (e) {
   setState(e.originalEvent.state, null, location.pathname + location.search + location.hash);
+=======
+function onclick (e) {
+  var el = e.currentTarget;
+  var which = _.isUndefined(e.which) ? e.button : e.which;
+  var href = el.href;
+  var path = el.pathname + el.search + el.hash;
+
+  // we only want to handle clicks on links which:
+  //  - are with the left mouse button with no meta key pressed
+  if (which !== 1)
+    return;
+
+  if (e.metaKey || e.ctrlKey || e.shiftKey) 
+    return;
+  
+  // - haven't been cancelled already
+  if (e.isDefaultPrevented())
+    return;
+  
+  // - aren't in a new window
+  if (el.target)
+    return;
+  
+  // - aren't external to the app
+  if (!IronLocation.isSameOrigin(href)) 
+    return;
+  
+  // note that we _do_ handle links which point to the current URL
+  // and links which only change the hash.
+  e.preventDefault();
+  IronLocation.set(path);
+}
+
+function onpopstate (e) {
+  setState(e.state, null, location.pathname + location.search + location.hash);
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 }
 
 IronLocation = {};
 
+<<<<<<< HEAD
+=======
+IronLocation.options = {
+  "linkSelector": 'a[href]'
+};
+
+IronLocation.configure = function(options){
+  if (this.isStarted){
+    IronLocation.unbindEvents();
+  }
+  _.extend(this.options, options);
+  
+  if(this.isStarted){
+    IronLocation.bindEvents();
+  }
+};
+
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 IronLocation.origin = function () {
   return location.protocol + '//' + location.host;
 };
@@ -56,6 +111,7 @@ IronLocation.set = function (url, options) {
 
 // store the state for later access
 setState = function(newState, title, url, skipReactive) {
+<<<<<<< HEAD
   newState = _.extend({}, newState);
   newState.path = url;
   newState.title = title;
@@ -64,6 +120,14 @@ setState = function(newState, title, url, skipReactive) {
     dep.changed();
   
   currentState = newState;
+=======
+  if (!skipReactive && (currentState.path !== url))
+    dep.changed();
+
+  currentState = newState || {};
+  currentState.path = url;
+  currentState.title = title;
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 }
 
 IronLocation.pushState = function (state, title, url, skipReactive) {
@@ -76,12 +140,15 @@ IronLocation.pushState = function (state, title, url, skipReactive) {
 };
 
 IronLocation.replaceState = function (state, title, url, skipReactive) {
+<<<<<<< HEAD
   // allow just the state or title to be set
   if (arguments.length < 2)
     title = currentState.title;
   if (arguments.length < 3)
     url = currentState.path;
     
+=======
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
   setState(state, title, url, skipReactive);
   
   if (history.replaceState)
@@ -92,10 +159,18 @@ IronLocation.replaceState = function (state, title, url, skipReactive) {
 
 IronLocation.bindEvents = function(){
   $(window).on('popstate', onpopstate);
+<<<<<<< HEAD
+=======
+  $(document).on('click', this.options.linkSelector, onclick);
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 };
 
 IronLocation.unbindEvents = function(){
   $(window).off('popstate', onpopstate);
+<<<<<<< HEAD
+=======
+  $(document).off('click', this.options.linkSelector, onclick);
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 };
 
 IronLocation.start = function () {
@@ -119,3 +194,8 @@ IronLocation.stop = function () {
   IronLocation.unbindEvents();
   this.isStarted = false;
 };
+<<<<<<< HEAD
+=======
+
+IronLocation.start();
+>>>>>>> cc20340b580279c144180b746d13276193497c8d

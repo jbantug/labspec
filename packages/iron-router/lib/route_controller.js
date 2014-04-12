@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var rewriteLegacyHooks = function (controller) {
   var legacyToNew = {
     'load': 'onRun',
@@ -127,6 +128,46 @@ RouteController.prototype = {
 
     // concatenate together hook arrays from the inheritance
     // heirarchy, starting at the top parent down to the child.
+=======
+/*****************************************************************************/
+/* IronRouteController */
+/*****************************************************************************/
+
+/**
+ * Base class for client and server RouteController.
+ */
+
+IronRouteController = function (options) {
+  var self = this;
+
+  options = this.options = options || {};
+
+  var getOption = function (key) {
+    return Utils.pick(self.options[key], self[key]);
+  };
+
+  this.router = options.router;
+  this.route = options.route;
+  this.path = options.path;
+  this.params = options.params || [];
+  this.where = options.where || 'client';
+  this.action = options.action || this.action;
+  this.hooks = {};
+
+  options.load = Utils.toArray(options.load);
+  options.before = Utils.toArray(options.before);
+  options.after = Utils.toArray(options.after);
+  options.unload = Utils.toArray(options.unload);
+};
+
+IronRouteController.prototype = {
+  constructor: IronRouteController,
+  
+  runHooks: function (hookName, more) {
+    var ctor = this.constructor
+      , more = Utils.toArray(more);
+
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
     var collectInheritedHooks = function (ctor) {
       var hooks = [];
 
@@ -137,6 +178,7 @@ RouteController.prototype = {
         hooks.concat(ctor.prototype[hookName]) : hooks;
     };
 
+<<<<<<< HEAD
 
     // get a list of hooks to run in the following order:
     // 1. RouteController option hooks
@@ -218,6 +260,38 @@ RouteController.prototype = {
 _.extend(RouteController, {
   /**
    * Inherit from RouteController
+=======
+    var prototypeHooks = collectInheritedHooks(this.constructor);
+    var routeHooks = this.options[hookName];
+    var globalHooks = 
+      this.route ? this.router.getHooks(hookName, this.route.name) : [];
+
+    var allHooks = globalHooks.concat(routeHooks).concat(prototypeHooks).concat(more);
+
+    for (var i = 0, hook; hook = allHooks[i]; i++) {
+      if (this.stopped)
+        break;
+      hook.call(this);
+    }
+  },
+
+  run: function () {
+    throw new Error('not implemented');
+  },
+
+  action: function () {
+    throw new Error('not implemented');
+  },
+
+  stop: function() {
+    this.stopped = true;
+  }
+};
+
+_.extend(IronRouteController, {
+  /**
+   * Inherit from IronRouteController
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
    *
    * @param {Object} definition Prototype properties for inherited class.
    */

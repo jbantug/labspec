@@ -482,23 +482,37 @@ Router.map(function () {
 ```
 
 The layout template must declare where it wants various child templates to
+<<<<<<< HEAD
 render. You can do this by using the `{{> yield}}` helper. A basic layout would
+=======
+render. You can do this by using the `{{yield}}` helper. A basic layout would
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 look like this:
 
 ```html
 <template name="layout">
   <div>
+<<<<<<< HEAD
     {{> yield}}
+=======
+    {{yield}}
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
   </div>
 </template>
 ```
 
+<<<<<<< HEAD
 But you can also specify regions. This allows you to render templates
 into any number of regions in the layout. For example:
+=======
+But you can also specify "named" yields. This allows you to render templates
+into any number of areas in the layout. For example:
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 
 ```html
 <template name="layout">
   <aside>
+<<<<<<< HEAD
     {{> yield region='aside'}}
   </aside>
 
@@ -508,11 +522,26 @@ into any number of regions in the layout. For example:
 
   <footer>
     {{> yield region='footer'}}
+=======
+    {{yield 'aside'}}
+  </aside>
+
+  <div>
+    {{yield}}
+  </div>
+
+  <footer>
+    {{yield 'footer'}}
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
   </footer>
 </template>
 ```
 
+<<<<<<< HEAD
 You can specify which templates to render into the region using the
+=======
+You can specify which templates to render into the named yields using the
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 `yieldTemplates` option of your route. For example:
 
 ```javascript
@@ -529,11 +558,19 @@ Router.map(function () {
 });
 ```
 
+<<<<<<< HEAD
 The above example will render the template named `myAsideTemplate` to the region
 named `aside` and the template named `myFooter` to the region named `footer`. The
 main template `myHomeTemplate` specified by the `template` option will be
 rendered into the **main** region. This is the region without a name
 in the center that looks like this: `{{> yield}}`.
+=======
+The above example will render the template named `myAsideTemplate` to the yield
+named `aside` and the template named `myFooter` to the yield named `footer`. The
+main template `myHomeTemplate` specified by the `template` option will be
+rendered into the **main** yield. This is the yield without a name
+in the center that looks like this: `{{yield}}`.
+>>>>>>> cc20340b580279c144180b746d13276193497c8d
 
 ### Data
 You can provide a data context for the current route by providing a `data`
